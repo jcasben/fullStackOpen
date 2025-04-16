@@ -1,10 +1,10 @@
 import Person from "./Person.jsx";
 
-const PersonList = ({persons}) => {
+const PersonList = ({persons, onDelete}) => {
     return (
         <div>
             {persons.map(person =>
-                <Person key={person.id} name={person.name} number={person.number}/>
+                <Person key={person.id} person={person} onDelete={onDelete}/>
             )}
         </div>
     );
