@@ -59,9 +59,9 @@ const App = () => {
                         'info'
                     );
                 })
-                .catch(() => {
+                .catch(error => {
                     showNotification(
-                        `Error creating ${personObj.name}`,
+                        error.response.data.error,
                         'error'
                     );
                 })
