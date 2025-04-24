@@ -7,7 +7,8 @@
     "dev": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rm -rf dist && cd ../../part2/phonebook && npm run build && cp -r dist ../../part3/phonebook-backend",
-    "deploy": "npm run build:ui && git add . && git commit -m uibuild && git push"
+    "deploy": "npm run build:ui && git add . && git commit -m uibuild && git push",
+    "lint": "eslint ."
   },
   "author": "Jesus Castillo",
   "license": "MIT",
@@ -17,5 +18,11 @@
     "express": "^5.1.0",
     "mongoose": "^8.13.2",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "@stylistic/eslint-plugin-js": "^4.2.0",
+    "eslint": "^9.25.1",
+    "globals": "^16.0.0"
   }
 }

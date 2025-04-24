@@ -19,7 +19,7 @@ app.get('/info', (request, response) => {
   Person.find({}).then(result => persons = result);
 
   response.send(`<div><p>The phonebook has info for ${persons.length} people</p><p>${new Date()}</p></div>`);
-})
+});
 
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
@@ -37,7 +37,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end();
     })
     .catch(error => next(error));
@@ -56,7 +56,7 @@ app.post('/api/persons', (request, response, next) => {
 });
 
 app.put('/api/persons/:id', (request, response, next) => {
-  const {name, number} = request.body;
+  const { name, number } = request.body;
 
   Person.findById(request.params.id)
     .then(person => {
@@ -67,28 +67,28 @@ app.put('/api/persons/:id', (request, response, next) => {
 
       return person.save().then((updatedPerson) => {
         response.json(updatedPerson);
-      })
+      });
     })
     .catch(error => next(error));
-})
+});
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({error: 'unknown endpoint'})
-}
+  response.status(404).send({ error: 'unknown endpoint' });
+};
 
-app.use(unknownEndpoint)
+app.use(unknownEndpoint);
 
 const errorHandler = (error, request, response, next) => {
   console.error(error.message);
 
   if (error.name === 'CastError') {
-    return response.status(400).send({error: 'malformed id'});
+    return response.status(400).send({ error: 'malformed id' });
   } else if (error.name === 'ValidationError') {
-    return response.status(400).send({error: error.message});
+    return response.status(400).send({ error: error.message });
   }
 
   next(error);
-}
+};
 
 app.use(errorHandler);
 
